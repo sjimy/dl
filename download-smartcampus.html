@@ -24,18 +24,16 @@
   <ol>
     <li>作业模块基本功能完成</li>
   </ol>
-  <button onclick="toDoanload('https://coding.net/api/share/download/cf1c7be2-04ff-44a1-b66d-e925512e9e69')">
-    IOS-测试版-教师端
-  </button>
-  <button onclick="toDoanload('https://coding.net/api/share/download/6df867dc-9609-45d6-afd8-ff7e1032b7c1')">
-    IOS-测试版-家长端
-  </button>
+  <ul>
+    <li><button onclick="toDoanload('cf1c7be2-04ff-44a1-b66d-e925512e9e69')">IOS-测试版-教师端</button><li>
+    <li><button onclick="toDoanload('6df867dc-9609-45d6-afd8-ff7e1032b7c1')">IOS-测试版-家长端</button><li>
+  </ul>
 </div>
 
 
 <script>
-  function toDoanload(url){
-    window.location.href = url;
+  function toDoanload(key){
+    window.location.href = "https://coding.net/api/share/download/"+url;
   }
 </script>
 </body>
