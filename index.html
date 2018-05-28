@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>家校共享APP下载</title>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <style>
+    h2{text-align: center}
+    .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
+    .version-container>div{font-size: 20px;}
+    .version-container>p{font-size: 15px;}
+    .version-container>button{padding: 5px 10px;margin:8px 0;font-size:15px;width: fit-content;background-color: #019ddd;color:white;border-radius: 5px;cursor:pointer;}
+    .version-container>button:hover{ background:#b2e2ff;}
+  </style>
 </head>
 <body>
- index
+<h2>家校共享APP下载</h2>
+
+
+<div class="version-container">
+  <div>1.2.2</div>
+  <p>
+    1.作业功能模块初步完成<br>
+    1.作业功能模块初步完成<br>
+    1.作业功能模块初步完成<br>
+  </p>
+  <button onclick="toDoanload('https://coding.net/api/share/download/cf1c7be2-04ff-44a1-b66d-e925512e9e69')">
+    IOS-测试版-教师端
+  </button>
+  <button onclick="toDoanload('https://coding.net/api/share/download/6df867dc-9609-45d6-afd8-ff7e1032b7c1')">
+    IOS-测试版-家长端
+  </button>
+</div>
+
+
+<script>
+  function toDoanload(url){
+    window.location.href = url;
+  }
+</script>
 </body>
 </html>
