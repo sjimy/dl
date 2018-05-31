@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input id="upload" type="file" name="file" >
+</div>
+<div style="margin-top: 15px">
+    <button onclick="toUpload()">提交</button>
+</div>
+<div id="resultDiv">
+
+</div>
+
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+
+
+<!--
+    春雨医生图床   10m
+    http://api0.chunyuyisheng.com/files/save_to_upyun/
+    name : file
+    http://media2.chunyuyisheng.com/@/media/images/2018/01/05/29aa/867eaef2e282_w3744_h5616_.jpg
+-->
+
+<!--
+    中关村在线图床 (会被压缩文件大小)
+    http://my.zol.com.cn/index.php?c=Ajax_User&a=uploadImg
+    name : myPhoto
+    https://common-fd.zol-img.com.cn/g5/M00/05/06/ChMkJ1pkYqmILafNAA2LPkEbzF8AAkQRQKdSP0ADYtW381.jpg
+
+    http://ask.zol.com.cn/do/upImg/  5m
+    name : imageFile
+    https://common-fd.zol-img.com.cn/g5/M00/05/06/ChMkJlpkZmuIEGrEAA2LPkEbzF8AAkQSgOrcvYADYtW225.jpg
+    https://common-fd.zol-img.com.cn/t_s800x800/g5/M00/05/06/ChMkJlpkZmuIEGrEAA2LPkEbzF8AAkQSgOrcvYADYtW225.jpg
+-->
+
+<!--
+    飞猫云图床
+    http://cdn.feemoo.com/img_server/kind/php/upload_json.php?dir=image   5m
+    http://cdn.feemoo.com/img_server/kind/php/upload_json.php?dir=file    5m (只允许doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2格式)
+
+    服务器返回格式
+    url=/img_server/kind/php/../attached/image/20180121/20180121230251_48292.jpg
+    需要转换为
+    http://cdn.feemoo.com/img_server/kind/attached/image/20180121/20180121224400_43771.jpg
+    http://cdn.feemoo.com/img_server/kind/attached/file/20180122/20180122000257_35635.ppt
+
+    http://cdn.feemoo.com/img_server/kind/attached/file/20180122/20180122004929_78033.html
+-->
+
+<!--
+    游民星空图床 (跨域)
+    http://i.gamersky.com/uploadpic/index   5m
+
+    服务器返回格式
+    {"status":"ok",
+    "small":"http://img1.gamersky.com/upimg/users/2018/05/09/small_201805092309342515.jpg", //中图
+    "tiny":"http://img1.gamersky.com/upimg/users/2018/05/09/tiny_201805092309342515.jpg", //压缩后小图
+    "original":"http://img1.gamersky.com/upimg/users/2018/05/09/origin_201805092309342515.jpg", //原图
+    "tinysquare":"http://img1.gamersky.com/upimg/users/2018/05/09/tinysquare_201805092309342515.jpg", //压缩小方图
+    "size":"0.0",
+    "width":5472,
+    "height":3648,
+    "result":"上传成功","imageclass":"none"}
+
+
+
+
+    jpg zip 10m
+    http://www.bas.com.cn/index.php/utils/upload?formname=myform&editname=simg&uppath=static/upfile/xzzx&pn=
+
+    http://www.bas.com.cn/static/upfile/xzzx/201805272358128575.jpg
+-->
+
+<script>
+    function toUpload(){
+        var formData = new FormData();
+        formData.append("file",$("#upload")[0].files[0]);
+        console.log(formData);
+        $.ajax({
+            url : "http://zhaopin.spic.com.cn/hrjs/uploadfile?uploadtype=1",
+            type : 'post',
+            data : formData,
+            processData : false,
+            contentType : false,
+            success : function(responseStr) {
+                console.log(responseStr);
+                $("#resultDiv").html(responseStr);
+            },
+            error : function(responseStr) {
+                console.log("error");
+            }
+        });
+    }
+</script>
+</body>
+</html>
