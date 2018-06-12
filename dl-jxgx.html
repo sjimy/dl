@@ -11,68 +11,43 @@
     .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
     .number{font-size: 20px;}
     .btn-line{margin:8px 0 8px 15px;}
-    .btn-line button{padding: 5px 10px;margin: 0 10px;font-size:15px;width: fit-content;background-color: #019ddd;color:white;border-radius: 5px;cursor:pointer;}
-    .btn-line button:hover{ background:#b2e2ff;}
+    .btn-line .downBtn{padding: 5px 10px;margin: 0 10px;font-size:15px;width: fit-content;background-color: #019ddd;color:white;border-radius: 5px;cursor:pointer;}
+    .btn-line .downBtn:hover{ background:#b2e2ff;}
     .type{padding: 0 0 12px 12px;color: #019ddd;font-style: italic;}
+    .bg{position: absolute;background: #000000;width: 100vw;height:100vh;opacity: 0.5}
     .weixin-open{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
     .weixin-open .remind{text-align: center;font-size: 25px;z-index: 999;}
-    .weixin-open .bg{position: absolute;background: #000000;width: 100vw;height:100vh;opacity: 0.5}
+    .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
+    .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
   </style>
 </head>
 <body>
 <h2>家校共享APP下载</h2>
-  
-<div class="version-container">
-  <div class="number">1.2.5</div>
-  <ol>
-    <li>美化所有弹框效果</li>
-    <li>解决IOS微课堂视频全屏后旋转手机到竖屏后,状态栏没恢复问题</li>
-  </ol>
-  <div class="btn-line">
-    <div class="type">android-测试版</div>
-    <button onclick="toDoanload('9473b9e9-b109-4be9-a660-de31973c0878')">下载教师端</button>
-  </div>
-</div>
-  
-<div class="version-container">
-  <div class="number">1.2.4</div>
-  <ol>
-    <li>教师端旧版作业模块发布作业、补充作业、批改作业按钮打开</li>
-    <li>家长端旧版作业模块交作业按钮打开</li>
-    <li>家长端直播价格页面美化</li>
-    <li>家长端登陆页美化</li>
-    <li>家长端添加定位卡页面添加说明</li>
-    <li>直播改为原生,添加非wifi播放提醒</li>
-    <li>Toast提示美化</li>
-    <li>解决家长端错题本非智能题学生答案不显示问题</li>
-    <li>解决家长端IOS版本做作业头部后退按钮太高问题</li>
-    <li>解决IOS微课堂视频和直播视频无法全屏切换问题</li>
-  </ol>
-  <div class="btn-line">
-    <div class="type">android-正式版</div>
-    <button onclick="toDoanload('9845edf0-d164-4e86-a213-7c2f79d2a342')">下载教师端</button>
-    <button onclick="toDoanload('ccf4e449-1064-4290-8b86-ec926baebb4c')">下载家长端</button> 
-  </div>
-</div>
 
-<div class="version-container">
-  <div class="number">1.2.3</div>
-  <ol>
-    <li>集成ios解决最近bug版本</li>
-    <li>教师端解决发布作业选择题目页面全选后取消，选中效果未消失问题</li>
-    <li>家长端添加绑定学生卡功能</li>
-  </ol>
-  <div class="btn-line">
-    <div class="type">android-正式版</div>
-    <button onclick="toDoanload('66e363d2-5add-4eab-be88-8d14247ab0bd')">下载教师端</button>
-    <button onclick="toDoanload('88ff1cbf-8250-4ee2-a1ed-14c6bd32caf2')">下载家长端</button> 
+<script id="tpl" type="text/html">
+  <%list.forEach(function (item){%>
+  <div class="version-container">
+    <div class="number"><%=item.version %></div>
+    <ol>
+      <%item.updateNote.forEach(function (node){%>
+      <li><%=node%></li>
+      <%})%>
+    </ol>
+    <%item.download.forEach(function (down){%>
+    <div class="btn-line">
+      <div class="type"><%=down.title%></div>
+      <%if(down.teacher){%>
+      <button class="downBtn" onclick="toDownload(<%=down.teacher%>)">下载教师端</button>
+      <%}%>
+      <%if(down.parent){%>
+      <button class="downBtn" onclick="toDownload(<%=down.teacher%>)">下载家长端</button>
+      <%}%>
+    </div>
+    <%})%>
   </div>
-  <div class="btn-line">
-    <div class="type">android-测试版</div>
-    <button onclick="toDoanload('4b8c56cb-130a-48d9-9022-c53f9af2ad44')">下载教师端</button>
-    <button onclick="toDoanload('a568c146-1497-404e-8e59-8db68db892a2')">下载家长端</button> 
-  </div>
-</div>
+  <%})%>
+</script>
+<div id="content"></div>
 
 <div class="weixin-open" style="display: none">
   <div class="bg"></div>
@@ -80,23 +55,40 @@
   <div class="remind">请点击右上角选项，选择使用浏览器打开下载</div>
 </div>
 
+<div class="loading">
+  <div>加载中，请稍后</div>
+</div>
 
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/template_js/0.7.1/template.min.js"></script>
 <script>
-    function toDoanload(key){
+    $(function() {
+        $.ajax({
+            url:"dl-jxgx.json",
+            dataType:"json",
+            cache:false,
+            type:"get",
+            success:function(result){
+                $(".loading").hide();
+                var html = template($("#tpl").html(),{list:result});
+                $("#content").html(html);
+            },
+            error:function(xhr,status,error){
+                alert(error);
+            }
+        });
+    });
+    function toDownload(key){
         if(isWeiXin()){
             document.getElementsByClassName("weixin-open")[0].style.display = "flex";
             return;
         }
+        var key = $(this).attr('bindSrc');
         if(key == null || key.length == 0){
             alert("下载地址尚未配置");
             return;
         }
         window.location.href = "https://coding.net/api/share/download/"+key;
-    }
-    function getParamFromUrl(key){
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)","i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r!=null) return (r[2]); return null;
     }
     function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
@@ -105,13 +97,6 @@
         } else {
             return false;
         }
-    }
-
-    var pageUrl = window.location.href;
-    var t = getParamFromUrl("t");
-    if(t == null || t.length == 0){
-        t = new Date().getTime();
-        window.location.href = pageUrl+"?t="+t;
     }
 </script>
 </body>
