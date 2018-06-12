@@ -7,6 +7,7 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <style>
+    body{padding-bottom: 120px}
     h2{text-align: center}
     .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
     .number{font-size: 20px;}
@@ -19,6 +20,7 @@
     .weixin-open .remind{text-align: center;font-size: 25px;z-index: 999;}
     .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
     .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
+    .downImg{position: absolute;width: 120px;height: 120px;margin-top: 38px;margin-left: -110px;}
   </style>
 </head>
 <body>
@@ -37,10 +39,18 @@
     <div class="btn-line">
       <div class="type"><%=down.title%></div>
       <%if(down.teacher){%>
-      <button class="downBtn" onclick="toDownload(<%=down.teacher%>)">下载教师端</button>
+      <button class="downBtn"
+              onclick="toDownload('<%=down.teacher%>')"
+              onmouseover="showQrcode(this,'<%=down.teacher%>')"
+              onmouseout="hideQrcode(this)">下载教师端</button>
+      <img class="downImg" style="display: none">
       <%}%>
       <%if(down.parent){%>
-      <button class="downBtn" onclick="toDownload(<%=down.teacher%>)">下载家长端</button>
+      <button class="downBtn"
+              onclick="toDownload(<%=down.parent%>)"
+              onmouseover="showQrcode(this,'<%=down.parent%>')"
+              onmouseout="hideQrcode(this)">下载家长端</button>
+      <img class="downImg" style="display: none">
       <%}%>
     </div>
     <%})%>
@@ -83,12 +93,20 @@
             document.getElementsByClassName("weixin-open")[0].style.display = "flex";
             return;
         }
-        var key = $(this).attr('bindSrc');
         if(key == null || key.length == 0){
             alert("下载地址尚未配置");
             return;
         }
         window.location.href = "https://coding.net/api/share/download/"+key;
+    }
+    function showQrcode(thiz,key){
+        var imgView = $(thiz).next();
+        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url=https://coding.net/api/share/download/"+key);
+        imgView.show();
+    }
+    function hideQrcode(thiz){
+        var imgView = $(thiz).next();
+        imgView.hide();
     }
     function isWeiXin() {
         var ua = window.navigator.userAgent.toLowerCase();
