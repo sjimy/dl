@@ -21,6 +21,7 @@
     .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
     .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
     .downImg{position: absolute;width: 120px;height: 120px;margin-top: 38px;margin-left: -110px;}
+    .time{margin-left: 10px;font-size: 14px;font-style: normal;color: #aaaaaa;}
   </style>
 </head>
 <body>
@@ -37,7 +38,12 @@
     </ol>
     <%item.download.forEach(function (down){%>
     <div class="btn-line">
-      <div class="type"><%=down.title%></div>
+      <div class="type">
+        <%=down.title%>
+        <%if(down.time){%>
+        <span class="time"><%=down.time%></span>
+        <%}%>
+      </div>
       <%if(down.teacher){%>
       <button class="downBtn"
               onclick="toDownload('<%=down.teacher%>')"
