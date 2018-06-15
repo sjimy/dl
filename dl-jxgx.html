@@ -58,7 +58,7 @@
       <%}%>
       <%if(down.parent){%>
       <button class="downBtn"
-              onclick="toDownload(<%=down.parent%>)"
+              onclick="toDownload('<%=down.parent%>')"
 
               <%if(os.isPc){%>
               onmouseover="showQrcode(this,'<%=down.parent%>')"
