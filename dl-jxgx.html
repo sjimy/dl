@@ -47,15 +47,25 @@
       <%if(down.teacher){%>
       <button class="downBtn"
               onclick="toDownload('<%=down.teacher%>')"
+
+              <%if(os.isPc){%>
               onmouseover="showQrcode(this,'<%=down.teacher%>')"
-              onmouseout="hideQrcode(this)">下载教师端</button>
+              onmouseout="hideQrcode(this)"
+              <%}%>
+
+        >下载教师端</button>
       <img class="downImg" style="display: none">
       <%}%>
       <%if(down.parent){%>
       <button class="downBtn"
               onclick="toDownload(<%=down.parent%>)"
+
+              <%if(os.isPc){%>
               onmouseover="showQrcode(this,'<%=down.parent%>')"
-              onmouseout="hideQrcode(this)">下载家长端</button>
+              onmouseout="hideQrcode(this)"
+              <%}%>
+
+        >下载家长端</button>
       <img class="downImg" style="display: none">
       <%}%>
     </div>
@@ -94,6 +104,25 @@
             }
         });
     });
+
+    var os = function() {
+        var ua = navigator.userAgent,
+            isWindowsPhone = /(?:Windows Phone)/.test(ua),
+            isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+            isAndroid = /(?:Android)/.test(ua),
+            isFireFox = /(?:Firefox)/.test(ua),
+            isChrome = /(?:Chrome|CriOS)/.test(ua),
+            isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+            isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+            isPc = !isPhone && !isAndroid && !isSymbian;
+        return {
+            isTablet: isTablet,
+            isPhone: isPhone,
+            isAndroid : isAndroid,
+            isPc : isPc
+        };
+    }();
+
     function toDownload(key){
         if(isWeiXin()){
             document.getElementsByClassName("weixin-open")[0].style.display = "flex";
