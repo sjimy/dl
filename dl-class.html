@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>班牌APP下载</title>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <style>
+    body{padding-bottom: 120px}
+    h2{text-align: center}
+    .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
+    .number{font-size: 20px;}
+    .btn-line{margin:8px 0 8px 15px;}
+    .btn-line .downBtn{padding: 5px 10px;margin: 0 10px;font-size:15px;width: fit-content;background-color: #019ddd;color:white;border-radius: 5px;cursor:pointer;}
+    .btn-line .downBtn:hover{ background:#b2e2ff;}
+    .type{padding: 0 0 12px 12px;color: #019ddd;font-style: italic;}
+    .bg{position: absolute;background: #000000;width: 100vw;height:100vh;opacity: 0.5}
+    .weixin-open{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
+    .weixin-open .remind{text-align: center;font-size: 25px;z-index: 999;}
+    .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
+    .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
+    .downImg{position: absolute;width: 120px;height: 120px;margin-top: 38px;margin-left: -110px;}
+    .time{margin-left: 10px;font-size: 14px;font-style: normal;color: #aaaaaa;}
+  </style>
+</head>
+<body>
+<h2>班牌APP下载</h2>
+
+<script id="tpl" type="text/html">
+  <%list.forEach(function (item){%>
+  <div class="version-container">
+    <div class="number"><%=item.version %></div>
+    <ol>
+      <%item.updateNote.forEach(function (node){%>
+      <li><%=node%></li>
+      <%})%>
+    </ol>
+    <%item.download.forEach(function (down){%>
+    <div class="btn-line">
+      <div class="type">
+        <%=down.title%>
+        <%if(down.time){%>
+        <span class="time"><%=down.time%></span>
+        <%}%>
+      </div>
+      <%if(down.teacher){%>
+      <button class="downBtn"
+              onclick="toDownload('<%=down.teacher%>')"
+
+              <%if(os.isPc){%>
+              onmouseover="showQrcode(this,'<%=down.teacher%>')"
+              onmouseout="hideQrcode(this)"
+              <%}%>
+
+        >点击下载</button>
+      <img class="downImg" style="display: none">
+      <%}%>
+    </div>
+    <%})%>
+  </div>
+  <%})%>
+</script>
+<div id="content"></div>
+
+<div class="weixin-open" style="display: none">
+  <div class="bg"></div>
+  <div class="remind">微信暂不支持下载安装</div>
+  <div class="remind">请点击右上角选项，选择使用浏览器打开下载</div>
+</div>
+
+<div class="loading">
+  <div>加载中，请稍后</div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/template_js/0.7.1/template.min.js"></script>
+<script>
+    $(function() {
+        $.ajax({
+            url:"dl-class.json",
+            dataType:"json",
+            cache:false,
+            type:"get",
+            success:function(result){
+                $(".loading").hide();
+                var html = template($("#tpl").html(),{list:result});
+                $("#content").html(html);
+            },
+            error:function(xhr,status,error){
+                alert(error);
+            }
+        });
+    });
+
+    var os = function() {
+        var ua = navigator.userAgent,
+            isWindowsPhone = /(?:Windows Phone)/.test(ua),
+            isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+            isAndroid = /(?:Android)/.test(ua),
+            isFireFox = /(?:Firefox)/.test(ua),
+            isChrome = /(?:Chrome|CriOS)/.test(ua),
+            isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+            isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+            isPc = !isPhone && !isAndroid && !isSymbian;
+        return {
+            isTablet: isTablet,
+            isPhone: isPhone,
+            isAndroid : isAndroid,
+            isPc : isPc
+        };
+    }();
+
+    function toDownload(key){
+        if(isWeiXin()){
+            document.getElementsByClassName("weixin-open")[0].style.display = "flex";
+            return;
+        }
+        if(key == null || key.length == 0){
+            alert("下载地址尚未配置");
+            return;
+        }
+        window.location.href = "https://coding.net/api/share/download/"+key;
+    }
+    function showQrcode(thiz,key){
+        var imgView = $(thiz).next();
+        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url=https://coding.net/api/share/download/"+key);
+        imgView.show();
+    }
+    function hideQrcode(thiz){
+        var imgView = $(thiz).next();
+        imgView.hide();
+    }
+    function isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
