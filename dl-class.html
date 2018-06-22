@@ -44,12 +44,12 @@
         <span class="time"><%=down.time%></span>
         <%}%>
       </div>
-      <%if(down.teacher){%>
+      <%if(down.url){%>
       <button class="downBtn"
-              onclick="toDownload('<%=down.teacher%>')"
+              onclick="toDownload('<%=down.url%>')"
 
               <%if(os.isPc){%>
-              onmouseover="showQrcode(this,'<%=down.teacher%>')"
+              onmouseover="showQrcode(this,'<%=down.url%>')"
               onmouseout="hideQrcode(this)"
               <%}%>
 
