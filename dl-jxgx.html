@@ -122,6 +122,10 @@
     }();
 
     function toDownload(key){
+        if(isWeiXin()){
+            alert("微信不支持安装APP，请用系统自带浏览器打开，再进行下载");
+            return;
+        }
         if(key == null || key.length == 0){
             alert("下载地址尚未配置");
             return;
