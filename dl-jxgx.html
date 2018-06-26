@@ -6,8 +6,9 @@
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
+  <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
   <style>
-    body{padding-bottom: 120px}
+    body{padding-bottom: 120px;margin: 0}
     h2{text-align: center}
     .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
     .number{font-size: 20px;}
@@ -15,9 +16,8 @@
     .btn-line .downBtn{padding: 5px 10px;margin: 0 10px;font-size:15px;width: fit-content;background-color: #019ddd;color:white;border-radius: 5px;cursor:pointer;}
     .btn-line .downBtn:hover{ background:#b2e2ff;}
     .type{padding: 0 0 12px 12px;color: #019ddd;font-style: italic;}
-    .bg{position: absolute;background: #000000;width: 100vw;height:100vh;opacity: 0.5}
-    .weixin-open{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
-    .weixin-open .remind{text-align: center;font-size: 25px;z-index: 999;}
+    .weixin-open{background: #222222;padding: 4vw 10vw;}
+    .weixin-open .remind{color: white;font-size: 14px}
     .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
     .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
     .downImg{position: absolute;width: 120px;height: 120px;margin-top: 38px;margin-left: -110px;}
@@ -25,6 +25,10 @@
   </style>
 </head>
 <body>
+<div class="weixin-open animated zoomIn" style="display: none">
+  <div class="remind">微信暂不支持下载安装</div>
+  <div class="remind">请点击右上角选项，选择使用浏览器打开下载</div>
+</div>
 <h2>家校共享APP下载</h2>
 
 <script id="tpl" type="text/html">
@@ -75,12 +79,6 @@
 </script>
 <div id="content"></div>
 
-<div class="weixin-open" style="display: none">
-  <div class="bg"></div>
-  <div class="remind">微信暂不支持下载安装</div>
-  <div class="remind">请点击右上角选项，选择使用浏览器打开下载</div>
-</div>
-
 <div class="loading">
   <div>加载中，请稍后</div>
 </div>
@@ -124,10 +122,6 @@
     }();
 
     function toDownload(key){
-        if(isWeiXin()){
-            document.getElementsByClassName("weixin-open")[0].style.display = "flex";
-            return;
-        }
         if(key == null || key.length == 0){
             alert("下载地址尚未配置");
             return;
@@ -150,6 +144,11 @@
         } else {
             return false;
         }
+    }
+
+
+    if(isWeiXin()){
+        document.getElementsByClassName("weixin-open")[0].style.display = "block";
     }
 </script>
 </body>
