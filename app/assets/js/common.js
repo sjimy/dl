@@ -11,13 +11,6 @@ function useOnlineServer(){
   return false;
 }
 
-//切换当前的相对路径
-if(window.location.href.indexOf("shjian.cc")>=0){
-  $("base").attr("href","/app/");
-}else{
-  $("base").attr("href","/");
-}
-
 /**
  * 原生调用前端方法
  * @param actionId 动作ID
