@@ -71,6 +71,10 @@
         "title":"android-测试版",
         "teacher":"4b8c56cb-130a-48d9-9022-c53f9af2ad44",
         "parent":"a568c146-1497-404e-8e59-8db68db892a2"
+      },
+      {
+        "title":"ios-测试版",
+        "teacher":"itms-services://?action=download-manifest&url=https://web.shjian.cc/dl-ios-jxgx/manifest-1.1.1-test-teacher.plist"
       }
     ]
   }

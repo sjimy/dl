@@ -130,7 +130,12 @@
             alert("下载地址尚未配置");
             return;
         }
-        window.location.href = "https://coding.net/api/share/download/"+key;
+		
+		if(key.indexOf('itms-services')>=0){
+			window.location.href = key;
+		}else{
+			window.location.href = "https://coding.net/api/share/download/"+key;
+		}
     }
     function showQrcode(thiz,key){
         var imgView = $(thiz).next();
