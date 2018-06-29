@@ -120,6 +120,14 @@
             isPc : isPc
         };
     }();
+	
+	function getDownloadUrl(key){
+		if(key.indexOf('itms-services')>=0){
+			return key;
+		}else{
+			return "https://coding.net/api/share/download/"+key;
+		}
+	}
 
     function toDownload(key){
         if(isWeiXin()){
@@ -130,16 +138,13 @@
             alert("下载地址尚未配置");
             return;
         }
-		
-		if(key.indexOf('itms-services')>=0){
-			window.location.href = key;
-		}else{
-			window.location.href = "https://coding.net/api/share/download/"+key;
-		}
+		var downloadUrl = getDownloadUrl(key);
+		window.location.href = downloadUrl;
     }
+	
     function showQrcode(thiz,key){
         var imgView = $(thiz).next();
-        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url=https://coding.net/api/share/download/"+key);
+        imgView.attr("src",getDownloadUrl(key));
         imgView.show();
     }
     function hideQrcode(thiz){
