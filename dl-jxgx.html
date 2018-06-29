@@ -138,7 +138,7 @@
             alert("下载地址尚未配置");
             return;
         }
-		var downloadUrl = getDownloadUrl(key);
+		var downloadUrl = "http://b.bshare.cn/barCode?site=weixin&url="+getDownloadUrl(key);
 		window.location.href = downloadUrl;
     }
 	
