@@ -138,13 +138,13 @@
             alert("下载地址尚未配置");
             return;
         }
-		var downloadUrl = "http://b.bshare.cn/barCode?site=weixin&url="+getDownloadUrl(key);
+		var downloadUrl = getDownloadUrl(key);
 		window.location.href = downloadUrl;
     }
 	
     function showQrcode(thiz,key){
         var imgView = $(thiz).next();
-        imgView.attr("src",getDownloadUrl(key));
+        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url="+getDownloadUrl(key));
         imgView.show();
     }
     function hideQrcode(thiz){
