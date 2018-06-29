@@ -144,7 +144,9 @@
 	
     function showQrcode(thiz,key){
         var imgView = $(thiz).next();
-        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url="+getDownloadUrl(key));
+		var downloadUrl = getDownloadUrl(key); 
+		downloadUrl = encodeURI(downloadUrl);
+        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url="+downloadUrl);
         imgView.show();
     }
     function hideQrcode(thiz){
