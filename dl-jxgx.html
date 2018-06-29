@@ -8,7 +8,7 @@
   <meta name="msapplication-tap-highlight" content="no">
   <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
   <style>
-    body{padding-bottom: 120px;margin: 0}
+    body{padding-bottom: 200px;margin: 0}
     h2{text-align: center}
     .version-container{display:flex;flex-direction:column;align-content:flex-start;padding: 10px;}
     .number{font-size: 20px;}
@@ -20,7 +20,7 @@
     .weixin-open .remind{color: white;font-size: 14px}
     .loading{position: absolute;width: 100vw;height: 100vh;top: 0;left: 0;color: white;display: flex;justify-content: center;align-items: center;flex-direction: column;}
     .loading>div{color: white;padding: 20px;background: #888888;border-radius: 10px;}
-    .downImg{position: absolute;width: 120px;height: 120px;margin-top: 38px;margin-left: -110px;}
+    .downImg{position: absolute;margin-top: 38px;margin-left: -110px;display: inline-block;}
     .time{margin-left: 10px;font-size: 14px;font-style: normal;color: #aaaaaa;}
   </style>
 </head>
@@ -58,7 +58,7 @@
               <%}%>
 
         >下载教师端</button>
-      <img class="downImg" style="display: none">
+      <div class="downImg" style="display: none"></div>
       <%}%>
       <%if(down.parent){%>
       <button class="downBtn"
@@ -70,7 +70,7 @@
               <%}%>
 
         >下载家长端</button>
-      <img class="downImg" style="display: none">
+      <div class="downImg" style="display: none"></div>
       <%}%>
     </div>
     <%})%>
@@ -85,6 +85,7 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/template_js/0.7.1/template.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script>
     $(function() {
         $.ajax({
@@ -144,9 +145,17 @@
 	
     function showQrcode(thiz,key){
         var imgView = $(thiz).next();
-		var downloadUrl = getDownloadUrl(key); 
-		downloadUrl = encodeURI(downloadUrl);
-        imgView.attr("src","http://b.bshare.cn/barCode?site=weixin&url="+downloadUrl);
+		var downloadUrl = getDownloadUrl(key);
+		if(downloadUrl.indexOf('itms-services')>=0){
+            downloadUrl = "https://web.shjian.cc/dl-jxgx.html";
+        }
+        if($(imgView).html().length == 0){
+            $(imgView).qrcode({
+                width: 150,
+                height: 150,
+                text: downloadUrl
+            });
+        }
         imgView.show();
     }
     function hideQrcode(thiz){
