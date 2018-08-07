@@ -1,5 +1,22 @@
 [
     {
+    "version":"0.0.4",
+    "updateNote":[
+      "token过期后、环信别处登录后,自动跳转到登录页面",
+      "优化页面关闭到时候,相关网络请求取消操作",
+      "H5入口和参数完善",
+      "修复解散群闪退问题",
+      "nativeWebview页面布局美化"
+    ],
+    "download":[
+      {
+        "title":"android-测试版",
+        "time":"2018/08/07 18:07:00",
+        "teacher":"9c2e8b72-e67b-4e29-925b-2d5667bc2d75"
+      }
+    ]
+  },
+  {
     "version":"0.0.3",
     "updateNote":[
       "教师端调用H5会传递首页选中的班级信息(clazzId,gradeId)",
