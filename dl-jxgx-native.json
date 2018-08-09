@@ -1,5 +1,23 @@
 [
   {
+    "version":"0.0.6",
+    "updateNote":[
+      "H5页面添加开发者模式控制台,方便调试",
+      "H5调用接口token过期与原生交互实现",
+      "完成成长记录模块",
+      "登陆后区分中小学和幼儿园账号",
+      "登录字段名userName修改为account",
+      "解决token过期或者在别处登陆，偶尔出现的闪退问题"
+    ],
+    "download":[
+      {
+        "title":"android-测试版",
+        "time":"2018/08/09 13:10:00",
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.0.6.apk"
+      }
+    ]
+  },
+  {
     "version":"0.0.5",
     "updateNote":[
       "解决部分存在虚拟按钮的手机打开H5页面出现到遮挡问题",
