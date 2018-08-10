@@ -1,5 +1,26 @@
 [
   {
+    "version":"0.0.8",
+    "updateNote":[
+      "首页添加下拉刷新",
+      "解决拍照闪退问题",
+      "H5解决图片上传失败问题",
+      "活动发布、查看活动详情完成",
+      "添加首页考勤入口",
+      "添加关于我们、修改密码页面",
+      "完成幼儿园的今日考勤和看我",
+      "完成中小学的今日考勤和发布的作业",
+      "修改成长记录相关bug"
+    ],
+    "download":[
+      {
+        "title":"android-测试版",
+        "time":"2018/08/10 18:30:00",
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.0.8.apk"
+      }
+    ]
+  },
+  {
     "version":"0.0.7",
     "updateNote":[
       "H5控制台显示优化",
