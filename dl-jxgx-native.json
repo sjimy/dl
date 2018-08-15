@@ -1,5 +1,22 @@
 [
   {
+    "version":"0.1.1",
+    "updateNote":[
+      "解决成长记录不能退出问题",
+      "图片上传功能完成",
+      "解决部分设备出现的拍照、选图片闪退问题",
+      "解决成长记录数据未改变时不能结束记录的bug",
+      "解决list空页面"
+    ],
+    "download":[
+      {
+        "title":"android-测试版",
+        "time":"2018/08/15 14:31:00",
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.1.1.apk"
+      }
+    ]
+  },
+  {
     "version":"0.1.0",
     "updateNote":[
       "首页添加下拉刷新",
