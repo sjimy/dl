@@ -1,6 +1,6 @@
 [
   {
-    "version":"0.1.1",
+    "version":"教师端0.1.1、家长端0.0.1",
     "updateNote":[
       "解决成长记录不能退出问题",
       "图片上传功能完成",
@@ -13,6 +13,11 @@
         "title":"android-测试版",
         "time":"2018/08/15 14:31:00",
         "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.1.1.apk"
+      },
+      {
+        "title":"android-测试版",
+        "time":"2018/08/16 11:36:00",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-parent-release-0.0.1.apk"
       }
     ]
   },
