@@ -1,13 +1,14 @@
 [
   {
-    "version":"教师端0.1.4",
+    "version":"教师端0.1.4、家长端0.0.4",
     "updateNote":[
     ],
     "download":[
       {
         "title":"android-测试版",
         "time":"2018/08/20 17:25:00",
-        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.1.4.apk"
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-teacher-release-0.1.4.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/apk/app-parent-release-0.0.4.apk"
       }
     ]
   },
