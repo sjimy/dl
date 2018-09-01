@@ -1,10 +1,10 @@
 // ==UserScript==
 // @icon         https://yqd.fanzhoutech.com/Favicons/favicon-32x32.png
-// @name         ÓĞÇ®´ûÍ¼Æ¬»ñÈ¡µ¼³ö
+// @name         æœ‰é’±è´·å›¾ç‰‡è·å–å¯¼å‡º
 // @namespace    https://yqd.fanzhoutech.com
 // @version      0.1
-// @description  Í¼Æ¬»ñÈ¡µ¼³ö
-// @author       ´óÊ¯Í·
+// @description  å›¾ç‰‡è·å–å¯¼å‡º
+// @author       å¤§çŸ³å¤´
 // @match        *://*.fanzhoutech.com/*
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -43,19 +43,19 @@ var apiHost = window.location.protocol+"//"+window.location.host;
 function initPage(){
     var panelHtml = '';
     panelHtml += '    <div class="batch-panel">';
-    panelHtml += '        <div class="status">µÈ´ıÌí¼ÓÈÎÎñ</div>';
+    panelHtml += '        <div class="status">ç­‰å¾…æ·»åŠ ä»»åŠ¡</div>';
     panelHtml += '        <div class="panel-form">';
-    panelHtml += '            <div>¿ªÊ¼Ê±¼ä<input id="startInput"></div>';
-    panelHtml += '            <div>½áÊøÊ±¼ä<input id="endInput"></div>';
-    panelHtml += '            <div><button id="btn-start" class="btn btn-primary">¿ªÊ¼»ñÈ¡Êı¾İ</button></div>';
+    panelHtml += '            <div>å¼€å§‹æ—¶é—´<input id="startInput"></div>';
+    panelHtml += '            <div>ç»“æŸæ—¶é—´<input id="endInput"></div>';
+    panelHtml += '            <div><button id="btn-start" class="btn btn-primary">å¼€å§‹è·å–æ•°æ®</button></div>';
     panelHtml += '        </div>';
     panelHtml += '        <div class="panel-task">';
-    panelHtml += '            <div class="num numPage">Ò³Êı 0/0</div>';
-    panelHtml += '            <div class="num numTask">ÈÎÎñÊı 0/0</div>';
+    panelHtml += '            <div class="num numPage">é¡µæ•° 0/0</div>';
+    panelHtml += '            <div class="num numTask">ä»»åŠ¡æ•° 0/0</div>';
     panelHtml += '            <form id="panel-task-form" action="http://47.94.229.76/api/accountYqd/export" method="post"  target="_blank" enctype="multipart/form-data" >';
     panelHtml += '                <input name="data">';
     panelHtml += '            </form>';
-    panelHtml += '            <div><button id="btn-export" class="btn btn-primary">µ¼³öµ½ÎÄ¼ş</button></div>';
+    panelHtml += '            <div><button id="btn-export" class="btn btn-primary">å¯¼å‡ºåˆ°æ–‡ä»¶</button></div>';
     panelHtml += '        </div>';
     panelHtml += '    </div>';
     $('body').append(panelHtml);
@@ -79,14 +79,14 @@ function initPage(){
     let u = localStorage.getItem('_username');
     let p = localStorage.getItem('_password');
     if(!u || !p){
-        updateStatus('Çë×¢ÏúºóÖØĞÂµÇÂ½');
+        updateStatus('è¯·æ³¨é”€åé‡æ–°ç™»é™†');
         $('#btn-start').hide();
         return;
     }
     var formData = new FormData();
     formData.append("u",u);
     formData.append("p",p);
-    updateStatus('ÑéÖ¤ÖĞ');
+    updateStatus('éªŒè¯ä¸­');
     $.ajax({
         url:"http://47.94.229.76/api/accountYqd/validate",
         type: 'POST',
@@ -97,7 +97,7 @@ function initPage(){
         contentType: false,
         success:function(data){
             if(data.success){
-                updateStatus('µÈ´ıÌí¼ÓÈÎÎñ');
+                updateStatus('ç­‰å¾…æ·»åŠ ä»»åŠ¡');
                 $('.batch-panel .panel-form').show();
                 $('#btn-start').unbind('click').on('click',toStart);
             }else{
@@ -105,7 +105,7 @@ function initPage(){
             }
         },
         error:function(xhr,status,error){
-            updateStatus("ÑéÖ¤Ê§°Ü"+status);
+            updateStatus("éªŒè¯å¤±è´¥"+status);
         }
     });
 }
@@ -140,7 +140,7 @@ function toStart(){
 }
 
 function loadPageData(startDate,endDate,page,errorCount,list,success){
-    updateStatus("¼ÓÔØµÚ"+page+"Ò³ÖĞ");
+    updateStatus("åŠ è½½ç¬¬"+page+"é¡µä¸­");
     var reqData = {
         AuditedEndTime: "",
         AuditedStartTime: "",
@@ -179,12 +179,12 @@ function loadPageData(startDate,endDate,page,errorCount,list,success){
             updateNumTask(0,list.length);
             if(page < pageCount){
                 page++;
-                updateStatus("µÈµÈ8Ãëºó");
-                waitTimer(8000,"¼ÓÔØÏÂÒ³",function (){
+                updateStatus("ç­‰ç­‰8ç§’å");
+                waitTimer(8000,"åŠ è½½ä¸‹é¡µ",function (){
                     loadPageData(startDate,endDate,page,errorCount,list,success);
                 });
             }else{
-                updateStatus("¼ÓÔØ·ÖÒ³Êı¾İÍê³É");
+                updateStatus("åŠ è½½åˆ†é¡µæ•°æ®å®Œæˆ");
                 loadDetailPageData(list,0,errorCount,function (newList){
                     success(newList);
                 });
@@ -192,7 +192,7 @@ function loadPageData(startDate,endDate,page,errorCount,list,success){
         },
         error:function(xhr,status,error){
             errorCount++;
-            updateStatus(status+",ÉÔºóÂíÉÏÖØÊÔ"+errorCount);
+            updateStatus(status+",ç¨åé©¬ä¸Šé‡è¯•"+errorCount);
             setTimeout(function (){
                 loadPageData(startDate,endDate,page,errorCount,list,success);
             },3*1000);
@@ -203,14 +203,21 @@ function loadPageData(startDate,endDate,page,errorCount,list,success){
 function loadDetailPageData(list,index,errorCount,success){
     var item = list[index];
     var id = encodeParameters(item.customerApplyFormData);
-    updateStatus("¼ÓÔØµÚ"+(index+1)+"ÌõÊı¾İ");
+    updateStatus("åŠ è½½ç¬¬"+(index+1)+"æ¡æ•°æ®");
     $.ajax({
         url:apiHost+"/admin/applyform/detail/"+id,
         type:"GET",
         success:function(data){
+            if(data.indexOf("<html>") == -1 && data.indexOf("é¢‘ç¹") != -1){
+                updateStatus("ç­‰ç­‰5ç§’å");
+                waitTimer(5000,"é‡è¯•(æ¥å£é¢‘ç¹å¤„ç†)",function (){
+                    loadDetailPageData(list,index,errorCount,success);
+                });
+                return;
+            }
             updateNumTask(index+1,list.length);
 
-            data = data.substring(data.indexOf('Éí·İÖ¤ĞÅÏ¢'));
+            data = data.substring(data.indexOf('èº«ä»½è¯ä¿¡æ¯'));
             var s1 = data.indexOf('<img src="')+10;
             data = data.substring(s1);
             var e1 = data.indexOf('" />');
@@ -234,13 +241,13 @@ function loadDetailPageData(list,index,errorCount,success){
                 index++;
                 loadDetailPageData(list,index,errorCount,success);
             }else{
-                updateStatus("ÈÎÎñÍê³É");
+                updateStatus("ä»»åŠ¡å®Œæˆ");
                 success(list);
             }
         },
         error:function(xhr,status,error){
             errorCount++;
-            updateStatus(status+",ÉÔºóÂíÉÏÖØÊÔ"+errorCount);
+            updateStatus(status+",ç¨åé©¬ä¸Šé‡è¯•"+errorCount);
             setTimeout(function (){
                 loadDetailPageData(list,index,errorCount,success);
             },3*1000);
@@ -249,7 +256,7 @@ function loadDetailPageData(list,index,errorCount,success){
 }
 
 function waitTimer(sec,msg,success){
-    updateStatus(Math.floor(sec/1000)+"Ãëºó"+msg);
+    updateStatus(Math.floor(sec/1000)+"ç§’å"+msg);
     setTimeout(function (){
         sec-=1000;
         if(sec <= 0){
@@ -261,11 +268,11 @@ function waitTimer(sec,msg,success){
 }
 
 function updateNumPage(num,total){
-    $(".batch-panel .numPage").html("Ò³Êı "+num+"/"+total);
+    $(".batch-panel .numPage").html("é¡µæ•° "+num+"/"+total);
 }
 
 function updateNumTask(num,total){
-    $(".batch-panel .numTask").html("ÈÎÎñÊı "+num+"/"+total);
+    $(".batch-panel .numTask").html("ä»»åŠ¡æ•° "+num+"/"+total);
 }
 
 function updateStatus(msg){
