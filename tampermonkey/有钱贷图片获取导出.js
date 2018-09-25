@@ -118,7 +118,7 @@ function toStart(){
     var endTime = $("#endInput").val();
 
     $('#btn-start').hide();
-    loadPageData(startTime,endTime,1,0,[],function (list){
+    loadPageData(startTime,endTime,1,-1,0,[],function (list){
         $('#btn-export').show();
         $('#btn-export').unbind('click').on('click',function (){
             var arrayObj = [];
@@ -139,7 +139,7 @@ function toStart(){
     });
 }
 
-function loadPageData(startDate,endDate,page,errorCount,list,success){
+function loadPageData(startDate,endDate,page,pageCount,errorCount,list,success){
     updateStatus("加载第"+page+"页中");
     var reqData = {
         AuditedEndTime: "",
@@ -166,22 +166,40 @@ function loadPageData(startDate,endDate,page,errorCount,list,success){
         success:function(data){
 
             if(data.code){
-                updateStatus(data.message);
-                $(".panel-form").show();
-                $(".panel-task").hide();
+                if(data.code == 500){
+                    errorCount++;
+                    updateStatus("稍后重试"+errorCount+","+data.message);
+                    setTimeout(function (){
+                        loadPageData(startDate,endDate,page,pageCount,errorCount,list,success);
+                    },5*1000);
+                }else{
+                    updateStatus(data.message);
+                    $(".panel-form").show();
+                    $(".panel-task").hide();
+                }
                 return;
             }
 
-            var pageCount = data.pageCount;
-            var totalCount = data.totalCount;
-            list = list.concat(data.data);
+            var dataPageCount = data.pageCount;
+            var dataTotalCount = data.totalCount;
+            var dataList = data.data;
+            //偶尔会出现返回一条数据情况，服务器添加到频繁处理，需要等待几秒后重试
+            if(page < pageCount && dataTotalCount <= 1){
+                updateStatus("等等5秒后");
+                waitTimer(5000,"重试(接口频繁处理)",function (){
+                    loadPageData(startDate,endDate,page,pageCount,errorCount,list,success);
+                });
+                return;
+            }
+            pageCount = dataPageCount;
+            list = list.concat(dataList);
             updateNumPage(page,pageCount);
             updateNumTask(0,list.length);
             if(page < pageCount){
                 page++;
                 updateStatus("等等8秒后");
                 waitTimer(8000,"加载下页",function (){
-                    loadPageData(startDate,endDate,page,errorCount,list,success);
+                    loadPageData(startDate,endDate,page,pageCount,errorCount,list,success);
                 });
             }else{
                 updateStatus("加载分页数据完成");
@@ -194,7 +212,7 @@ function loadPageData(startDate,endDate,page,errorCount,list,success){
             errorCount++;
             updateStatus(status+",稍后马上重试"+errorCount);
             setTimeout(function (){
-                loadPageData(startDate,endDate,page,errorCount,list,success);
+                loadPageData(startDate,endDate,page,pageCount,errorCount,list,success);
             },3*1000);
         }
     });
