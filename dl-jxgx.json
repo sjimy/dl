@@ -1,5 +1,20 @@
 [
   {
+    "version":"1.2.6",
+    "updateNote":[
+      "教师端添加查寝功能",
+      "家长端首页考勤状态修改",
+      "解决环信被顶后无法登录问题"
+    ],
+    "download":[
+      {
+        "title":"android-测试版",
+        "time":"2018/09/26 18:50:00",
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-test-teacher-1.2.6.apk"
+      }
+    ]
+  },
+  {
     "version":"1.2.5",
     "updateNote":[
       "家长端添加设置家庭地址功能",
@@ -21,56 +36,14 @@
       {
         "title":"android-正式版",
         "time":"2018/06/27 12:14:00",
-        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-release-teacher-1.2.5.apk",
-        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-release-parent-1.2.5.apk"
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-release-teacher-1.2.5.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-release-parent-1.2.5.apk"
       },
       {
         "title":"android-测试版",
         "time":"2018/06/26 16:50:00",
-        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-test-teacher-1.2.5.apk",
-        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-test-parent-1.2.5.apk"
-      }
-    ]
-  },
-  {
-    "version":"1.2.4",
-    "updateNote":[
-      "教师端旧版作业模块发布作业、补充作业、批改作业按钮打开",
-      "家长端旧版作业模块交作业按钮打开",
-      "家长端直播价格页面美化",
-      "家长端登陆页美化",
-      "家长端添加定位卡页面添加说明",
-      "直播改为原生,添加非wifi播放提醒",
-      "Toast提示美化",
-      "解决家长端错题本非智能题学生答案不显示问题",
-      "解决家长端IOS版本做作业头部后退按钮太高问题",
-      "解决IOS微课堂视频和直播视频无法全屏切换问题"
-    ],
-    "download":[
-      {
-        "title":"android-正式版",
-        "teacher":"9845edf0-d164-4e86-a213-7c2f79d2a342",
-        "parent":"ccf4e449-1064-4290-8b86-ec926baebb4c"
-      }
-    ]
-  },
-  {
-    "version":"1.2.3",
-    "updateNote":[
-      "集成ios解决最近bug版本",
-      "教师端解决发布作业选择题目页面全选后取消，选中效果未消失问题",
-      "家长端添加绑定学生卡功能"
-    ],
-    "download":[
-      {
-        "title":"android-正式版",
-        "teacher":"66e363d2-5add-4eab-be88-8d14247ab0bd",
-        "parent":"88ff1cbf-8250-4ee2-a1ed-14c6bd32caf2"
-      },
-      {
-        "title":"android-测试版",
-        "teacher":"4b8c56cb-130a-48d9-9022-c53f9af2ad44",
-        "parent":"a568c146-1497-404e-8e59-8db68db892a2"
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-test-teacher-1.2.5.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-test-parent-1.2.5.apk"
       }
     ]
   }
