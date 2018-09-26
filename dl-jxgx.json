@@ -21,14 +21,14 @@
       {
         "title":"android-正式版",
         "time":"2018/06/27 12:14:00",
-        "teacher":"e983cd44-cdbe-467c-9a3d-747ef2bdc918",
-        "parent":"0d8cca6e-7884-4092-8726-416b13308436"
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-release-teacher-1.2.5.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-release-parent-1.2.5.apk"
       },
       {
         "title":"android-测试版",
         "time":"2018/06/26 16:50:00",
-        "teacher":"04065793-3a4d-44c5-ad0e-2de1d193c6aa",
-        "parent":"8bb47503-3272-4ff5-ba95-edc53534dde9"
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-test-teacher-1.2.5.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/android-test-parent-1.2.5.apk"
       }
     ]
   },
