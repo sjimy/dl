@@ -125,6 +125,8 @@
 	function getDownloadUrl(key){
 		if(key.indexOf('itms-services')>=0){
 			return key;
+		}else if(key.indexOf('http')>=0){
+			return key;
 		}else{
 			return "https://coding.net/api/share/download/"+key;
 		}
