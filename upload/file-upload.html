@@ -57,6 +57,8 @@
     游民星空图床 (跨域)
     http://i.gamersky.com/uploadpic/index   5m
 
+	files
+
     服务器返回格式
     {"status":"ok",
     "small":"http://img1.gamersky.com/upimg/users/2018/05/09/small_201805092309342515.jpg", //中图
@@ -69,18 +71,12 @@
     "result":"上传成功","imageclass":"none"}
 
 
-
-
-    jpg zip 10m
-    http://www.bas.com.cn/index.php/utils/upload?formname=myform&editname=simg&uppath=static/upfile/xzzx&pn=
-
-    http://www.bas.com.cn/static/upfile/xzzx/201805272358128575.jpg
 -->
 
 <script>
     function toUpload(){
         var formData = new FormData();
-        formData.append("file",$("#upload")[0].files[0]);
+        formData.append("files",$("#upload")[0].files[0]);
         console.log(formData);
         $.ajax({
             url : "http://i.gamersky.com/uploadpic/index",
