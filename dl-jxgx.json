@@ -8,6 +8,12 @@
     ],
     "download":[
       {
+        "title":"android-正式版",
+        "time":"2018/09/30 10:34:00",
+        "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-release-teacher-1.2.6.apk",
+        "parent":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-release-parent-1.2.6.apk"
+      },
+      {
         "title":"android-测试版",
         "time":"2018/09/26 19:22:00",
         "teacher":"https://kydbjapp.oss-cn-beijing.aliyuncs.com/ionic-apk/android-test-teacher-1.2.6.apk",
