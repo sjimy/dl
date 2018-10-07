@@ -1,6 +1,6 @@
 // ==UserScript==
 // @icon         https://kyfw.12306.cn/otn/resources/images/ots/favicon.ico
-// @name         火车票刷新重试
+// @name         12306刷新重试
 // @namespace    https://kyfw.12306.cn
 // @version      0.1
 // @description  刷新超时重试
