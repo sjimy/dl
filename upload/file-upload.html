@@ -76,10 +76,10 @@
 <script>
     function toUpload(){
         var formData = new FormData();
-        formData.append("files",$("#upload")[0].files[0]);
+        formData.append("file",$("#upload")[0].files[0]);
         console.log(formData);
         $.ajax({
-            url : "http://i.gamersky.com/uploadpic/index",
+            url : "http://api0.chunyuyisheng.com/files/save_to_upyun/",
             type : 'post',
             data : formData,
             processData : false,
